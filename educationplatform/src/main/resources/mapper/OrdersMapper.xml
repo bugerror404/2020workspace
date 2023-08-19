@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.design.educationplatform.mapper.OrdersMapper" >
+  <resultMap id="BaseResultMap" type="com.design.educationplatform.entity.Orders" >
+    <id column="o_id" property="oId" jdbcType="BIGINT" />
+    <result column="money" property="money" jdbcType="DOUBLE" />
+    <result column="receiver_address" property="receiverAddress" jdbcType="VARCHAR" />
+    <result column="receiver_name" property="receiverName" jdbcType="VARCHAR" />
+    <result column="receiver_phone" property="receiverPhone" jdbcType="VARCHAR" />
+    <result column="paystate" property="paystate" jdbcType="INTEGER" />
+    <result column="ordertime" property="ordertime" jdbcType="TIMESTAMP" />
+    <result column="id" property="id" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    o_id, money, receiver_address, receiver_name, receiver_phone, paystate, ordertime, 
+    id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from orders
+    where o_id = #{oId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from orders
+    where o_id = #{oId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.design.educationplatform.entity.Orders" >
+    insert into orders (o_id, money, receiver_address, 
+      receiver_name, receiver_phone, paystate, 
+      ordertime, id)
+    values (#{oId,jdbcType=BIGINT}, #{money,jdbcType=DOUBLE}, #{receiverAddress,jdbcType=VARCHAR}, 
+      #{receiverName,jdbcType=VARCHAR}, #{receiverPhone,jdbcType=VARCHAR}, #{paystate,jdbcType=INTEGER}, 
+      #{ordertime,jdbcType=TIMESTAMP}, #{id,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.design.educationplatform.entity.Orders" >
+    insert into orders
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="oId != null" >
+        o_id,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="receiverAddress != null" >
+        receiver_address,
+      </if>
+      <if test="receiverName != null" >
+        receiver_name,
+      </if>
+      <if test="receiverPhone != null" >
+        receiver_phone,
+      </if>
+      <if test="paystate != null" >
+        paystate,
+      </if>
+      <if test="ordertime != null" >
+        ordertime,
+      </if>
+      <if test="id != null" >
+        id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="oId != null" >
+        #{oId,jdbcType=BIGINT},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="receiverAddress != null" >
+        #{receiverAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverName != null" >
+        #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverPhone != null" >
+        #{receiverPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="paystate != null" >
+        #{paystate,jdbcType=INTEGER},
+      </if>
+      <if test="ordertime != null" >
+        #{ordertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.design.educationplatform.entity.Orders" >
+    update orders
+    <set >
+      <if test="money != null" >
+        money = #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="receiverAddress != null" >
+        receiver_address = #{receiverAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverName != null" >
+        receiver_name = #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverPhone != null" >
+        receiver_phone = #{receiverPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="paystate != null" >
+        paystate = #{paystate,jdbcType=INTEGER},
+      </if>
+      <if test="ordertime != null" >
+        ordertime = #{ordertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="id != null" >
+        id = #{id,jdbcType=BIGINT},
+      </if>
+    </set>
+    where o_id = #{oId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.design.educationplatform.entity.Orders" >
+    update orders
+    set money = #{money,jdbcType=DOUBLE},
+      receiver_address = #{receiverAddress,jdbcType=VARCHAR},
+      receiver_name = #{receiverName,jdbcType=VARCHAR},
+      receiver_phone = #{receiverPhone,jdbcType=VARCHAR},
+      paystate = #{paystate,jdbcType=INTEGER},
+      ordertime = #{ordertime,jdbcType=TIMESTAMP},
+      id = #{id,jdbcType=BIGINT}
+    where o_id = #{oId,jdbcType=BIGINT}
+  </update>
+</mapper>

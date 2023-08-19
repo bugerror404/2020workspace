@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.design.educationplatform.mapper.CurriculumMapper" >
+  <resultMap id="BaseResultMap" type="com.design.educationplatform.entity.Curriculum" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="cname" property="cname" jdbcType="VARCHAR" />
+    <result column="created" property="created" jdbcType="DATE" />
+    <result column="modified" property="modified" jdbcType="DATE" />
+    <result column="categories" property="categories" jdbcType="VARCHAR" />
+    <result column="tags" property="tags" jdbcType="VARCHAR" />
+    <result column="allow_comment" property="allowComment" jdbcType="BIT" />
+    <result column="thumbnail" property="thumbnail" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.design.educationplatform.entity.Curriculum" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, cname, created, modified, categories, tags, allow_comment, thumbnail
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_curriculum
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_curriculum
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.design.educationplatform.entity.Curriculum" >
+    insert into t_curriculum (id, cname, created, 
+      modified, categories, tags, 
+      allow_comment, thumbnail, content
+      )
+    values (#{id,jdbcType=INTEGER}, #{cname,jdbcType=VARCHAR}, #{created,jdbcType=DATE}, 
+      #{modified,jdbcType=DATE}, #{categories,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, 
+      #{allowComment,jdbcType=BIT}, #{thumbnail,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.design.educationplatform.entity.Curriculum" >
+    insert into t_curriculum
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="cname != null" >
+        cname,
+      </if>
+      <if test="created != null" >
+        created,
+      </if>
+      <if test="modified != null" >
+        modified,
+      </if>
+      <if test="categories != null" >
+        categories,
+      </if>
+      <if test="tags != null" >
+        tags,
+      </if>
+      <if test="allowComment != null" >
+        allow_comment,
+      </if>
+      <if test="thumbnail != null" >
+        thumbnail,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cname != null" >
+        #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null" >
+        #{created,jdbcType=DATE},
+      </if>
+      <if test="modified != null" >
+        #{modified,jdbcType=DATE},
+      </if>
+      <if test="categories != null" >
+        #{categories,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null" >
+        #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="allowComment != null" >
+        #{allowComment,jdbcType=BIT},
+      </if>
+      <if test="thumbnail != null" >
+        #{thumbnail,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.design.educationplatform.entity.Curriculum" >
+    update t_curriculum
+    <set >
+      <if test="cname != null" >
+        cname = #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null" >
+        created = #{created,jdbcType=DATE},
+      </if>
+      <if test="modified != null" >
+        modified = #{modified,jdbcType=DATE},
+      </if>
+      <if test="categories != null" >
+        categories = #{categories,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null" >
+        tags = #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="allowComment != null" >
+        allow_comment = #{allowComment,jdbcType=BIT},
+      </if>
+      <if test="thumbnail != null" >
+        thumbnail = #{thumbnail,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.design.educationplatform.entity.Curriculum" >
+    update t_curriculum
+    set cname = #{cname,jdbcType=VARCHAR},
+      created = #{created,jdbcType=DATE},
+      modified = #{modified,jdbcType=DATE},
+      categories = #{categories,jdbcType=VARCHAR},
+      tags = #{tags,jdbcType=VARCHAR},
+      allow_comment = #{allowComment,jdbcType=BIT},
+      thumbnail = #{thumbnail,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.design.educationplatform.entity.Curriculum" >
+    update t_curriculum
+    set cname = #{cname,jdbcType=VARCHAR},
+      created = #{created,jdbcType=DATE},
+      modified = #{modified,jdbcType=DATE},
+      categories = #{categories,jdbcType=VARCHAR},
+      tags = #{tags,jdbcType=VARCHAR},
+      allow_comment = #{allowComment,jdbcType=BIT},
+      thumbnail = #{thumbnail,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

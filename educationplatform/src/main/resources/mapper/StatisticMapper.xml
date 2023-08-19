@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.design.educationplatform.mapper.StatisticMapper" >
+  <resultMap id="BaseResultMap" type="com.design.educationplatform.entity.Statistic" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="curriculum_id" property="curriculumId" jdbcType="INTEGER" />
+    <result column="hits" property="hits" jdbcType="INTEGER" />
+    <result column="comments_num" property="commentsNum" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, curriculum_id, hits, comments_num
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_statistic
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_statistic
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.design.educationplatform.entity.Statistic" >
+    insert into t_statistic (id, curriculum_id, hits, 
+      comments_num)
+    values (#{id,jdbcType=INTEGER}, #{curriculumId,jdbcType=INTEGER}, #{hits,jdbcType=INTEGER}, 
+      #{commentsNum,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.design.educationplatform.entity.Statistic" >
+    insert into t_statistic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="curriculumId != null" >
+        curriculum_id,
+      </if>
+      <if test="hits != null" >
+        hits,
+      </if>
+      <if test="commentsNum != null" >
+        comments_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="curriculumId != null" >
+        #{curriculumId,jdbcType=INTEGER},
+      </if>
+      <if test="hits != null" >
+        #{hits,jdbcType=INTEGER},
+      </if>
+      <if test="commentsNum != null" >
+        #{commentsNum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.design.educationplatform.entity.Statistic" >
+    update t_statistic
+    <set >
+      <if test="curriculumId != null" >
+        curriculum_id = #{curriculumId,jdbcType=INTEGER},
+      </if>
+      <if test="hits != null" >
+        hits = #{hits,jdbcType=INTEGER},
+      </if>
+      <if test="commentsNum != null" >
+        comments_num = #{commentsNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.design.educationplatform.entity.Statistic" >
+    update t_statistic
+    set curriculum_id = #{curriculumId,jdbcType=INTEGER},
+      hits = #{hits,jdbcType=INTEGER},
+      comments_num = #{commentsNum,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
